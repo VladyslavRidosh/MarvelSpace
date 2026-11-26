@@ -1,0 +1,136 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Post — MarvelSpace{% endblock %}
+
+{% block content %}
+
+<section class="create-post-section edit-post-page">
+
+    <div class="create-post-heading">
+        <span class="comic-label">HERO EDITOR</span>
+        <h1>EDIT YOUR POST!</h1>
+        <p>Every great story deserves the perfect version.</p>
+    </div>
+
+    <div class="create-post-layout">
+
+        <div class="create-post-form-card">
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="{{ post_form.caption.id_for_label }}">
+                        YOUR STORY
+                    </label>
+
+                    {{ post_form.caption }}
+
+                    <div class="caption-counter">
+                        <span id="caption-counter">
+                            {{ post.caption|length }}
+                        </span>/150
+                    </div>
+
+                    {% for error in post_form.caption.errors %}
+                        <p class="form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    <label>CURRENT MEDIA</label>
+
+                    <div class="current-post-media">
+
+                        {% for media in post.media.all %}
+
+                            {% if media.media_type == 'image' %}
+                                <img src="{{ media.file.url }}" alt="Post image">
+                            {% else %}
+                                <video controls>
+                                    <source src="{{ media.file.url }}">
+                                </video>
+                            {% endif %}
+
+                        {% empty %}
+                            <p>No media attached.</p>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_files">ADD NEW MEDIA</label>
+
+                    <input
+                        type="file"
+                        name="files"
+                        id="id_files"
+                        multiple
+                        accept="image/*,video/*"
+                    >
+
+                    <small>
+                        You can have up to 3 photos or 1 video in total.
+                    </small>
+                </div>
+
+                <button type="submit" class="publish-button">
+                    SAVE CHANGES!
+                </button>
+
+                <a
+                    href="{% url 'profile' request.user.username %}"
+                    class="cancel-edit-button"
+                >
+                    CANCEL
+                </a>
+
+            </form>
+
+        </div>
+
+        <div class="preview-post-card">
+
+            <div class="preview-post-heading">
+                <span>LIVE PREVIEW</span>
+                <span class="preview-status">EDIT MODE</span>
+            </div>
+
+            <div class="preview-post-user">
+                {% if request.user.avatar %}
+                    <img
+                        src="{{ request.user.avatar.url }}"
+                        alt="Avatar"
+                    >
+                {% else %}
+                    <div class="preview-avatar-placeholder">
+                        {{ request.user.username|first|upper }}
+                    </div>
+                {% endif %}
+
+                <strong>{{ request.user.username }}</strong>
+            </div>
+
+            <p id="preview-caption">{{ post.caption }}</p>
+
+            <div id="preview-media" class="preview-media-grid"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/edit_post.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/edit_post.js' %}"></script>
+{% endblock %}

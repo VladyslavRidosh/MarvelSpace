@@ -1,0 +1,78 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Story — MarvelSpace{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/create_story.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="create-story-page">
+
+    <div class="create-story-card">
+
+        <span class="create-story-eyebrow">
+            AVENGER EXCLUSIVE
+        </span>
+
+        <h1>CREATE <span>STORY!</span></h1>
+
+        <p class="create-story-description">
+            Share a moment with the MarvelSpace community.
+            Your story will be available for 24 hours.
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label for="story-file" class="story-upload-area">
+                <span class="story-upload-icon">+</span>
+                <strong>CHOOSE YOUR MEDIA</strong>
+                <span>Upload an image or video</span>
+            </label>
+
+            <input
+                type="file"
+                name="file"
+                id="story-file"
+                accept="image/*,video/*"
+                required
+            >
+
+            <div id="story-file-name" class="story-file-name">
+                No file selected
+            </div>
+
+            <button type="submit" class="create-story-button">
+                PUBLISH STORY
+            </button>
+
+        </form>
+
+        <a href="{% url 'stories' %}" class="back-to-stories">
+            BACK TO STORIES
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const storyInput = document.getElementById('story-file');
+    const storyFileName = document.getElementById('story-file-name');
+
+    storyInput.addEventListener('change', function () {
+        if (this.files.length > 0) {
+            storyFileName.textContent = this.files[0].name;
+        } else {
+            storyFileName.textContent = 'No file selected';
+        }
+    });
+</script>
+{% endblock %}

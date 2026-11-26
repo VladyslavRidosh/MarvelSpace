@@ -1,0 +1,98 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Profile — MarvelSpace{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-decoration auth-decoration-left">
+        POW!
+    </div>
+
+    <div class="auth-card edit-profile-card">
+
+        <div class="auth-header">
+            <span class="auth-comic-label">YOUR HERO. YOUR STORY.</span>
+
+            <h1>
+                EDIT
+                <span>PROFILE!</span>
+            </h1>
+
+            <p>Update your identity in the MarvelSpace universe.</p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" class="auth-form">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="auth-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="auth-field">
+                <label for="{{ form.username.id_for_label }}">HERO NAME</label>
+                {{ form.username }}
+
+                {% for error in form.username.errors %}
+                    <small class="auth-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="auth-field">
+                <label for="{{ form.email.id_for_label }}">EMAIL ADDRESS</label>
+                {{ form.email }}
+
+                {% for error in form.email.errors %}
+                    <small class="auth-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="auth-field">
+                <label for="{{ form.avatar.id_for_label }}">PROFILE AVATAR</label>
+                {{ form.avatar }}
+
+                {% for error in form.avatar.errors %}
+                    <small class="auth-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="auth-field">
+                <label for="{{ form.bio.id_for_label }}">YOUR BIO</label>
+                {{ form.bio }}
+
+                {% for error in form.bio.errors %}
+                    <small class="auth-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="auth-submit-button">
+                SAVE MY PROFILE!
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+            <a href="{% url 'profile' user.username %}">
+                BACK TO MY PROFILE!
+            </a>
+        </div>
+
+    </div>
+
+    <div class="auth-decoration auth-decoration-right">
+        BAM!
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}

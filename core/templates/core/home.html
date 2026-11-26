@@ -1,0 +1,405 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MarvelSpace — Enter the Universe{% endblock %}
+
+{% block content %}
+
+<section class="stories-section comic-animate">
+    <div class="stories-heading">
+        <div>
+            <span class="comic-label">LIVE FROM THE UNIVERSE</span>
+            <h2 class="stories-title">HERO STORIES!</h2>
+        </div>
+        <span class="stories-counter">ISSUE #001</span>
+    </div>
+
+    <div class="stories-list">
+
+        <div class="story-item add-story">
+            <div class="story-avatar">
+                <div class="story-add-icon">+</div>
+            </div>
+            <span>Your story</span>
+        </div>
+
+        <div class="story-item">
+            <div class="story-avatar">
+                <img src="{% static 'images/heroes/spider-man.jpg' %}" alt="Spider-Man">
+                <div class="story-online"></div>
+            </div>
+            <span>Spider-Man</span>
+        </div>
+
+        <div class="story-item">
+            <div class="story-avatar">
+                <img src="{% static 'images/heroes/iron-man.jpg' %}" alt="Iron Man">
+            </div>
+            <span>Iron Man</span>
+        </div>
+
+        <div class="story-item">
+            <div class="story-avatar">
+                <img src="{% static 'images/heroes/scarlet_witch.jpg' %}" alt="Scarlet Witch">
+            </div>
+            <span>Scarlet Witch</span>
+        </div>
+
+        <div class="story-item">
+            <div class="story-avatar">
+                <img src="{% static 'images/heroes/thor.jpg' %}" alt="Thor">
+            </div>
+            <span>Thor</span>
+        </div>
+
+        <div class="story-item">
+            <div class="story-avatar">
+                <img src="{% static 'images/heroes/hulk.jpg' %}" alt="Hulk">
+            </div>
+            <span>Hulk</span>
+        </div>
+
+        <div class="story-item">
+            <div class="story-avatar">
+                <img src="{% static 'images/heroes/black-panther.jpg' %}" alt="Black Panther">
+            </div>
+            <span>Black Panther</span>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="hero-section comic-animate">
+
+    <div class="hero-background-dots"></div>
+
+    <div class="hero-content">
+
+        <div class="comic-label">THE UNIVERSE IS YOURS!</div>
+
+        <h1 class="hero-title">
+            WELCOME TO
+            <span>MARVELSPACE!</span>
+        </h1>
+
+        <p class="hero-description">
+            Every hero has a story.
+            Every story deserves to be told.
+            Join the universe of Marvel fans!
+        </p>
+
+        <div class="hero-actions">
+            <a href="#" class="comic-button">
+                EXPLORE UNIVERSE
+            </a>
+
+            <a href="#" class="hero-secondary-button">
+                DISCOVER HEROES
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-decoration">
+
+        <div class="hero-burst">
+            <span>POW!</span>
+        </div>
+
+        <div class="hero-small-text">
+            YOUR STORY<br>
+            STARTS HERE
+        </div>
+
+    </div>
+
+    <div class="hero-bottom-caption">
+        <span>ISSUE #001</span>
+        <span>THE BEGINNING OF A NEW ERA</span>
+    </div>
+
+</section>
+
+
+<section class="universe-section comic-animate">
+
+    <div class="section-heading">
+        <div>
+            <span class="comic-label">CHOOSE YOUR PATH</span>
+            <h2 class="section-title">ENTER THE UNIVERSE</h2>
+        </div>
+
+        <span class="section-number">01 / 03</span>
+    </div>
+
+    <div class="universe-grid">
+
+        <article class="universe-card civilian-card">
+            <span class="universe-icon">★</span>
+            <span class="universe-category">LEVEL 01</span>
+            <h3>CIVILIAN</h3>
+            <p>
+                Discover stories, support creators
+                and become part of the community.
+            </p>
+            <span class="card-stamp">START HERE!</span>
+        </article>
+
+        <article class="universe-card hero-card">
+            <span class="universe-icon">⚡</span>
+            <span class="universe-category">LEVEL 02</span>
+            <h3>HERO</h3>
+            <p>
+                Create your own publications
+                and share your universe with others.
+            </p>
+            <span class="card-stamp">CREATE!</span>
+        </article>
+
+        <article class="universe-card avenger-card">
+            <span class="universe-icon">✦</span>
+            <span class="universe-category">LEVEL 03</span>
+            <h3>AVENGER</h3>
+            <p>
+                Unlock advanced features
+                and become a legend of MarvelSpace.
+            </p>
+            <span class="card-stamp">LEGENDARY!</span>
+        </article>
+
+    </div>
+
+</section>
+
+
+<section class="feed-section comic-animate">
+
+    <div class="section-heading">
+        <div>
+            <span class="comic-label">LATEST TRANSMISSIONS</span>
+            <h2 class="section-title">COMMUNITY FEED</h2>
+        </div>
+
+        <span class="section-number">02 / 03</span>
+    </div>
+
+    {% if posts %}
+
+        <div class="community-feed">
+
+            {% for post in posts %}
+
+                <article class="community-post comic-panel">
+
+                    <div class="community-post-header">
+
+                        <a href="{% url 'profile' post.author.username %}" class="community-post-profile-link">
+
+                            {% if post.author.avatar %}
+                                <img
+                                    src="{{ post.author.avatar.url }}"
+                                    alt="{{ post.author.username }}"
+                                    class="community-post-avatar"
+                                >
+                            {% else %}
+                                <div class="community-post-avatar-placeholder">
+                                    {{ post.author.username|first|upper }}
+                                </div>
+                            {% endif %}
+
+                        </a>
+
+                        <div class="community-post-author">
+                            <strong>
+                                <a href="{% url 'profile' post.author.username %}" class="post-author-link">
+                                    {{ post.author.username }}
+                                </a>
+                            </strong>
+
+                            <span>{{ post.author.get_role_display }}</span>
+                            <span>{{ post.created_at|date:"d.m.Y H:i" }}</span>
+                        </div>
+
+                    </div>
+
+                    {% if post.caption %}
+                        <div class="community-post-caption">
+                            {{ post.caption }}
+                        </div>
+                    {% endif %}
+
+                    {% with media_items=post.media.all %}
+
+                        {% if media_items %}
+
+                            <div class="community-post-media">
+
+                                <div class="post-carousel" data-carousel>
+
+                                    <div class="post-carousel-track">
+
+                                        {% for media in media_items %}
+
+                                            <div class="post-carousel-slide {% if forloop.first %}active{% endif %}">
+
+                                                {% if media.media_type == 'image' %}
+
+                                                    <img
+                                                        src="{{ media.file.url }}"
+                                                        alt="Post image"
+                                                    >
+
+                                                {% elif media.media_type == 'video' %}
+
+                                                    <video controls>
+                                                        <source src="{{ media.file.url }}">
+                                                        Your browser does not support video.
+                                                    </video>
+
+                                                {% endif %}
+
+                                            </div>
+
+                                        {% endfor %}
+
+                                    </div>
+
+                                    {% if media_items|length > 1 %}
+
+                                        <button
+                                            type="button"
+                                            class="carousel-arrow carousel-prev"
+                                            data-carousel-prev
+                                            aria-label="Previous photo"
+                                        >
+                                            &#10094;
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="carousel-arrow carousel-next"
+                                            data-carousel-next
+                                            aria-label="Next photo"
+                                        >
+                                            &#10095;
+                                        </button>
+
+                                        <div class="carousel-indicators">
+
+                                            {% for media in media_items %}
+
+                                                <button
+                                                    type="button"
+                                                    class="carousel-dot {% if forloop.first %}active{% endif %}"
+                                                    data-carousel-dot="{{ forloop.counter0 }}"
+                                                    aria-label="Go to photo {{ forloop.counter }}"
+                                                ></button>
+
+                                            {% endfor %}
+
+                                        </div>
+
+                                        <span class="carousel-counter">
+                                            <span data-carousel-current>1</span>
+                                            / {{ media_items|length }}
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+
+                    {% endwith %}
+
+                    <div class="community-post-footer">
+
+                        {% if user.is_authenticated and user != post.author %}
+
+                            <button
+                                type="button"
+                                class="like-button {% if user in post.likes.all %}liked{% endif %}"
+                                data-url="{% url 'toggle_like' post.id %}"
+                            >
+                                <span class="like-icon">
+                                    {% if user in post.likes.all %}♥{% else %}♡{% endif %}
+                                </span>
+                                <span>LIKE</span>
+                            </button>
+
+                        {% else %}
+
+                            <span class="like-disabled">♡ LIKE</span>
+
+                        {% endif %}
+
+                        <span>◯ COMMENT</span>
+                        <span>➤ SHARE</span>
+
+                        <span class="likes-count">
+                            {{ post.likes.count }} likes
+                        </span>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-feed comic-panel">
+
+            <div class="empty-feed-burst">BAM!</div>
+
+            <h3>THE STORY IS ABOUT TO BEGIN!</h3>
+
+            <p>
+                There are no publications here yet.
+                Be ready for the first transmissions from the MarvelSpace universe.
+            </p>
+
+            <span class="empty-feed-caption">STAY TUNED, HERO!</span>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<section class="final-banner comic-animate">
+
+    <div class="final-banner-content">
+        <span class="comic-label">YOUR NEXT CHAPTER</span>
+
+        <h2>READY TO JOIN THE UNIVERSE?</h2>
+
+        <p>
+            Your adventure in MarvelSpace starts here.
+        </p>
+    </div>
+
+    <div class="final-banner-burst">
+        <span>GO!</span>
+    </div>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/likes.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,98 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Explore — MarvelSpace{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/explore.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="explore-page">
+
+    <header class="explore-header">
+        <span class="explore-eyebrow">MARVELSPACE COMMUNITY</span>
+        <h1>EXPLORE <span>THE UNIVERSE!</span></h1>
+        <p>Discover amazing moments from the MarvelSpace community.</p>
+    </header>
+
+    <div class="explore-section-heading">
+        <h2>COMMUNITY POSTS</h2>
+        <span>{{ posts|length }} POSTS</span>
+    </div>
+
+    {% if posts %}
+
+        <div class="explore-grid">
+
+            {% for post in posts %}
+
+                {% with first_image=post.media.all %}
+                    {% for media in first_image %}
+                        {% if media.media_type == 'image' and forloop.first %}
+
+                            <a
+                                href="{% url 'profile' post.author.username %}"
+                                class="explore-card"
+                            >
+
+                                <div class="explore-card-image">
+                                    <img
+                                        src="{{ media.file.url }}"
+                                        alt="Post by {{ post.author.username }}"
+                                        loading="lazy"
+                                    >
+
+                                    <div class="explore-card-overlay">
+                                        <span>♡ {{ post.likes.count }}</span>
+                                        <span>VIEW PROFILE →</span>
+                                    </div>
+                                </div>
+
+                                <div class="explore-card-info">
+                                    <div class="explore-author">
+                                        {% if post.author.avatar %}
+                                            <img
+                                                src="{{ post.author.avatar.url }}"
+                                                alt="{{ post.author.username }}"
+                                            >
+                                        {% else %}
+                                            <span class="explore-avatar-placeholder">
+                                                {{ post.author.username|first|upper }}
+                                            </span>
+                                        {% endif %}
+
+                                        <strong>{{ post.author.username }}</strong>
+                                    </div>
+
+                                    {% if post.caption %}
+                                        <p>{{ post.caption|truncatechars:75 }}</p>
+                                    {% endif %}
+                                </div>
+
+                            </a>
+
+                        {% endif %}
+                    {% endfor %}
+                {% endwith %}
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="explore-empty">
+            <span>◈</span>
+            <h2>THE UNIVERSE IS WAITING!</h2>
+            <p>There are no photo posts to explore yet.</p>
+            <a href="{% url 'home' %}">BACK TO HOME</a>
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+
+{% load static %}
+
+<aside class="sidebar">
+    <a href="/" class="logo">
+        <span class="logo-marvel">MARVEL</span>
+        <span class="logo-space">SPACE</span>
+    </a>
+
+    <nav class="sidebar-menu">
+        <a href="/" class="sidebar-link active">
+            <span class="sidebar-icon">⌂</span>
+            <span>Home</span>
+        </a>
+
+       <a href="{% url 'search' %}" class="sidebar-link">
+    <span class="sidebar-icon">⌕</span>
+    <span>Search</span>
+</a>
+
+        <a href="{% url 'explore' %}" class="sidebar-link">
+            <span class="sidebar-icon">⍟</span>
+            <span>Explore</span>
+        </a>
+        <a href="{% url 'stories' %}" class="sidebar-link">
+    <span class="sidebar-icon">🕸️</span>
+    <span>Stories</span>
+</a>
+
+        <a href="#" class="sidebar-link">
+            <span class="sidebar-icon">♡</span>
+            <span>Notifications</span>
+        </a>
+
+        <a href="#" class="sidebar-link">
+            <span class="sidebar-icon">✉</span>
+            <span>Messages</span>
+        </a>
+
+        <a href="{% url 'create_post' %}" class="sidebar-link">
+    <span class="sidebar-icon">＋</span>
+    <span>Create post</span>
+</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' user.username %}" class="sidebar-link">
+    <span class="sidebar-icon">⎊</span>
+    <span>My profile</span>
+</a>
+
+            <div class="sidebar-user">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" alt="Avatar">
+                {% else %}
+                    <div class="avatar-placeholder">
+                        {{ user.username|first|upper }}
+                    </div>
+                {% endif %}
+
+                <span>{{ user.username }}</span>
+            </div>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="sidebar-link sidebar-logout">
+                    <span class="sidebar-icon">↪</span>
+                    <span>Logout</span>
+                </button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}" class="sidebar-link">
+                <span class="sidebar-icon">⇥</span>
+                <span>Login</span>
+            </a>
+        {% endif %}
+    </nav>
+
+    <div class="sidebar-bottom">
+        <span class="comic-label">MARVEL UNIVERSE</span>
+        <p>YOUR STORY STARTS HERE!</p>
+    </div>
+</aside>

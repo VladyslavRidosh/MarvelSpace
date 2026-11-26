@@ -1,0 +1,463 @@
+
+/* =========================================================
+   MARVELSPACE — SEARCH PAGE
+   Sections:
+   01. Search Page
+   02. Header
+   03. Search Form
+   04. Results
+   05. User Cards
+   06. Empty State
+   07. Responsive Design
+========================================================= */
+
+
+/* =========================================================
+   01. SEARCH PAGE
+========================================================= */
+
+.search-page {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 55px 45px 80px;
+    color: #171717;
+}
+
+
+/* =========================================================
+   02. HEADER
+========================================================= */
+
+.search-header {
+    margin-bottom: 38px;
+}
+
+.search-eyebrow {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 7px 12px;
+
+    background: #ffcc00;
+    border: 3px solid #171717;
+
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+
+    transform: rotate(-2deg);
+}
+
+.search-header h1 {
+    margin: 0;
+
+    color: #ffffff;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1;
+    font-weight: 1000;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+.search-header h1 span {
+    color: #ed1d24;
+}
+
+.search-header p {
+    margin-top: 15px;
+    color: #666;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   03. SEARCH FORM
+========================================================= */
+
+.search-form {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 55px;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+
+    background: #fff;
+    border: 4px solid #171717;
+    box-shadow: 6px 6px 0 #171717;
+}
+
+.search-input-icon {
+    padding-left: 17px;
+    color: #ed1d24;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.search-input-wrapper input {
+    width: 100%;
+    min-width: 0;
+    padding: 17px 15px;
+
+    border: none;
+    outline: none;
+    background: transparent;
+
+    color: #171717;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.search-input-wrapper input::placeholder {
+    color: #999;
+}
+
+.search-input-wrapper input::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+.search-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+
+    color: #ed1d24;
+    font-size: 20px;
+    font-weight: 900;
+    text-decoration: none;
+}
+
+.search-submit {
+    flex-shrink: 0;
+    padding: 0 27px;
+
+    background: #ed1d24;
+    border: 4px solid #171717;
+    box-shadow: 6px 6px 0 #171717;
+
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 1000;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.search-submit:hover {
+    background: #c90008;
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 #171717;
+}
+
+.search-input-wrapper:focus-within {
+    border-color: #ed1d24;
+}
+
+
+/* =========================================================
+   04. RESULTS
+========================================================= */
+
+.search-results {
+    width: 100%;
+}
+
+.search-results-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 24px;
+    padding-bottom: 13px;
+
+    border-bottom: 4px solid #171717;
+}
+
+.search-results-heading h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 1000;
+    letter-spacing: 1px;
+}
+
+.search-results-heading span {
+    padding: 6px 10px;
+
+    background: #ffcc00;
+    border: 2px solid #171717;
+
+    font-size: 11px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   05. USER CARDS
+========================================================= */
+
+.search-users-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.search-user-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    min-width: 0;
+    padding: 17px;
+
+    background: #fff;
+    border: 3px solid #171717;
+    box-shadow: 5px 5px 0 #171717;
+
+    color: #171717;
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.search-user-card:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 #171717;
+    background: #fff8e0;
+}
+
+.search-user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    width: 66px;
+    height: 66px;
+
+    overflow: hidden;
+
+    background: #ed1d24;
+    border: 3px solid #171717;
+    border-radius: 50%;
+
+    color: #fff;
+    font-size: 25px;
+    font-weight: 1000;
+}
+
+.search-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.search-user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.search-user-info h3 {
+    overflow: hidden;
+    margin: 0 0 5px;
+
+    font-size: 16px;
+    font-weight: 1000;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search-user-role {
+    display: inline-block;
+    margin-bottom: 7px;
+    padding: 3px 7px;
+
+    background: #ffcc00;
+    border: 1px solid #171717;
+
+    font-size: 9px;
+    font-weight: 1000;
+    text-transform: uppercase;
+}
+
+.search-user-info p {
+    overflow: hidden;
+    margin: 0;
+
+    color: #777;
+    font-size: 11px;
+    font-weight: 600;
+
+    text-overflow: ellipsis;
+}
+
+.search-user-arrow {
+    flex-shrink: 0;
+    color: #ed1d24;
+    font-size: 25px;
+    font-weight: 1000;
+
+    transition: transform 0.2s ease;
+}
+
+.search-user-card:hover .search-user-arrow {
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   06. EMPTY STATE
+========================================================= */
+
+.search-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 260px;
+    padding: 35px 20px;
+
+    background: #fff;
+    border: 4px dashed #171717;
+
+    text-align: center;
+}
+
+.search-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+    margin-bottom: 20px;
+
+    background: #ffcc00;
+    border: 3px solid #171717;
+    border-radius: 50%;
+
+    color: #171717;
+    font-size: 35px;
+    font-weight: 1000;
+}
+
+.search-empty h2 {
+    margin: 0 0 10px;
+
+    font-size: 22px;
+    font-weight: 1000;
+}
+
+.search-empty p {
+    margin: 0 0 8px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.search-empty > span:last-child {
+    color: #ed1d24;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.search-empty-welcome {
+    background:
+        radial-gradient(#e8e8e8 1px, transparent 1px),
+        #fff;
+
+    background-size: 12px 12px;
+}
+
+
+/* =========================================================
+   07. RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 900px) {
+    .search-page {
+        padding: 40px 25px 65px;
+    }
+
+    .search-users-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-page {
+        padding: 30px 15px 50px;
+    }
+
+    .search-header h1 {
+        font-size: 36px;
+    }
+
+    .search-form {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-input-wrapper {
+        min-height: 58px;
+    }
+
+    .search-submit {
+        min-height: 55px;
+    }
+
+    .search-user-card {
+        gap: 11px;
+        padding: 12px;
+    }
+
+    .search-user-avatar {
+        width: 55px;
+        height: 55px;
+    }
+
+    .search-user-arrow {
+        font-size: 20px;
+    }
+
+    .search-results-heading h2 {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 380px) {
+    .search-header h1 {
+        font-size: 30px;
+    }
+
+    .search-user-info h3 {
+        font-size: 14px;
+    }
+
+    .search-user-info p {
+        font-size: 10px;
+    }
+}

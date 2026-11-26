@@ -1,0 +1,83 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login — MarvelSpace{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-decoration auth-decoration-left">
+        POW!
+    </div>
+
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <span class="auth-comic-label">WELCOME BACK, HERO!</span>
+
+            <h1>
+                ENTER
+                <span>MARVELSPACE!</span>
+            </h1>
+
+            <p>Continue your story in the universe.</p>
+        </div>
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="auth-errors">
+                    Incorrect username or password. Please try again!
+                </div>
+            {% endif %}
+
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+
+            <div class="auth-field">
+                <label for="{{ form.username.id_for_label }}">
+                    HERO NAME
+                </label>
+
+                {{ form.username }}
+            </div>
+
+            <div class="auth-field">
+                <label for="{{ form.password.id_for_label }}">
+                    PASSWORD
+                </label>
+
+                {{ form.password }}
+            </div>
+<div class="auth-forgot-password">
+    <a href="{% url 'password_reset' %}">
+        FORGOT PASSWORD?
+    </a>
+</div>
+            <button type="submit" class="auth-submit-button">
+                LET ME IN!
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>NEW TO THE UNIVERSE?</p>
+            <a href="{% url 'register' %}">CREATE ACCOUNT!</a>
+        </div>
+
+    </div>
+
+    <div class="auth-decoration auth-decoration-right">
+        BAM!
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}

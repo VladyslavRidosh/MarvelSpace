@@ -1,0 +1,113 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if list_type == 'followers' %}
+        Followers — MarvelSpace
+    {% else %}
+        Following — MarvelSpace
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<section class="followers-page">
+
+    <div class="followers-header">
+
+        <span class="followers-comic-label">
+            MARVELSPACE COMMUNITY
+        </span>
+
+        {% if list_type == 'followers' %}
+            <h1>FOLLOWERS!</h1>
+            <p>Heroes following {{ profile_user.username }}</p>
+        {% else %}
+            <h1>FOLLOWING!</h1>
+            <p>Heroes followed by {{ profile_user.username }}</p>
+        {% endif %}
+
+        <a href="{% url 'profile' profile_user.username %}"
+           class="followers-back-button">
+            ← BACK TO PROFILE
+        </a>
+
+    </div>
+
+    <div class="followers-list">
+
+        {% for follow in follows %}
+
+            {% if list_type == 'followers' %}
+                {% with person=follow.follower %}
+
+                    <a href="{% url 'profile' person.username %}"
+                       class="follower-card">
+
+                        <div class="follower-avatar">
+                            {% if person.avatar %}
+                                <img src="{{ person.avatar.url }}"
+                                     alt="{{ person.username }}">
+                            {% else %}
+                                {{ person.username|first|upper }}
+                            {% endif %}
+                        </div>
+
+                        <div class="follower-info">
+                            <strong>{{ person.username }}</strong>
+                            <span>{{ person.get_role_display }}</span>
+                        </div>
+
+                        <span class="follower-arrow">→</span>
+
+                    </a>
+
+                {% endwith %}
+
+            {% else %}
+                {% with person=follow.following %}
+
+                    <a href="{% url 'profile' person.username %}"
+                       class="follower-card">
+
+                        <div class="follower-avatar">
+                            {% if person.avatar %}
+                                <img src="{{ person.avatar.url }}"
+                                     alt="{{ person.username }}">
+                            {% else %}
+                                {{ person.username|first|upper }}
+                            {% endif %}
+                        </div>
+
+                        <div class="follower-info">
+                            <strong>{{ person.username }}</strong>
+                            <span>{{ person.get_role_display }}</span>
+                        </div>
+
+                        <span class="follower-arrow">→</span>
+
+                    </a>
+
+                {% endwith %}
+            {% endif %}
+
+        {% empty %}
+
+            <div class="followers-empty">
+                <span>!</span>
+                <h2>NO HEROES HERE YET!</h2>
+                <p>This list is waiting for its first heroes.</p>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}

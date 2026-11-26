@@ -1,0 +1,111 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Join MarvelSpace — Registration{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-decoration auth-decoration-left">
+        POW!
+    </div>
+
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <span class="auth-comic-label">YOUR ORIGIN STORY BEGINS!</span>
+
+            <h1>
+                JOIN
+                <span>MARVELSPACE!</span>
+            </h1>
+
+            <p>Create your account and enter the universe.</p>
+        </div>
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="auth-errors">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="auth-field">
+                <label for="{{ form.username.id_for_label }}">
+                    HERO NAME
+                </label>
+
+                {{ form.username }}
+
+                {% for error in form.username.errors %}
+                    <small class="auth-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="auth-field">
+                <label for="{{ form.email.id_for_label }}">
+                    EMAIL ADDRESS
+                </label>
+
+                {{ form.email }}
+
+                {% for error in form.email.errors %}
+                    <small class="auth-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="auth-field">
+                <label for="{{ form.password1.id_for_label }}">
+                    CREATE PASSWORD
+                </label>
+
+                {{ form.password1 }}
+                
+                {% for error in form.password1.errors %}
+                    <small class="auth-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="auth-field">
+                <label for="{{ form.password2.id_for_label }}">
+                    CONFIRM PASSWORD
+                </label>
+
+                {{ form.password2 }}
+
+                {% for error in form.password2.errors %}
+                    <small class="auth-error">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="auth-submit-button">
+                CREATE MY ACCOUNT!
+            </button>
+
+        </form>
+
+        <div class="auth-footer">
+            <p>ALREADY PART OF THE UNIVERSE?</p>
+
+            <a href="{% url 'login' %}">
+                LOGIN HERE!
+            </a>
+        </div>
+
+    </div>
+
+    <div class="auth-decoration auth-decoration-right">
+        BAM!
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}

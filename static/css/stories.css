@@ -1,0 +1,406 @@
+
+/* =========================================================
+   MARVELSPACE — STORIES PAGE
+   Sections:
+   01. Stories Page
+   02. Header
+   03. Section Heading
+   04. Stories Grid
+   05. Story Cards
+   06. Empty State
+   07. Responsive Design
+========================================================= */
+
+
+/* =========================================================
+   01. STORIES PAGE
+========================================================= */
+
+.stories-page {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 55px 45px 80px;
+    color: #171717;
+}
+
+
+/* =========================================================
+   02. HEADER
+========================================================= */
+
+.stories-page-header {
+    margin-bottom: 45px;
+}
+
+.stories-eyebrow {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 7px 12px;
+
+    background: #ffcc00;
+    border: 3px solid #171717;
+
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+
+    transform: rotate(-2deg);
+}
+
+.stories-page-header h1 {
+    margin: 0;
+
+    color: #fff;
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1;
+    font-weight: 1000;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+.stories-page-header h1 span {
+    color: #ed1d24;
+}
+
+.stories-page-header p {
+    margin-top: 15px;
+    color: #aaa;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   03. SECTION HEADING
+========================================================= */
+
+.stories-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 25px;
+    padding-bottom: 13px;
+
+    border-bottom: 4px solid #171717;
+}
+
+.stories-section-heading h2 {
+    margin: 0;
+
+    color: #fff;
+    font-size: 21px;
+    font-weight: 1000;
+    letter-spacing: 1px;
+}
+
+.stories-section-heading span {
+    padding: 6px 10px;
+
+    background: #ffcc00;
+    border: 2px solid #171717;
+
+    color: #171717;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   04. STORIES GRID
+========================================================= */
+
+.stories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: start;
+}
+
+
+/* =========================================================
+   05. STORY CARDS
+========================================================= */
+
+.story-card {
+    min-width: 0;
+    overflow: hidden;
+
+    background: #fff;
+    border: 3px solid #171717;
+    box-shadow: 6px 6px 0 #171717;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.story-card:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 #171717;
+}
+
+.story-card-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 13px;
+    border-bottom: 2px solid #171717;
+}
+
+.story-author-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+
+    overflow: hidden;
+
+    background: #ed1d24;
+    border: 2px solid #171717;
+    border-radius: 50%;
+
+    color: #fff;
+    font-size: 17px;
+    font-weight: 1000;
+}
+
+.story-author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.story-author-info strong {
+    overflow: hidden;
+
+    color: #171717;
+    font-size: 13px;
+    font-weight: 1000;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.story-author-info span {
+    color: #777;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.story-media {
+    width: 100%;
+    aspect-ratio: 9 / 13;
+    overflow: hidden;
+    background: #171717;
+}
+
+.story-media img,
+.story-media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-media video {
+    background: #000;
+}
+
+.story-card-footer {
+    padding: 11px 13px;
+    background: #ffcc00;
+    border-top: 2px solid #171717;
+}
+
+.story-card-footer span {
+    color: #171717;
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   06. EMPTY STATE
+========================================================= */
+
+.stories-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 300px;
+    padding: 35px 20px;
+
+    background: #fff;
+    border: 4px dashed #171717;
+
+    text-align: center;
+}
+
+.stories-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 65px;
+    height: 65px;
+    margin-bottom: 20px;
+
+    background: #ffcc00;
+    border: 3px solid #171717;
+    border-radius: 50%;
+
+    color: #171717;
+    font-size: 35px;
+    font-weight: 1000;
+}
+
+.stories-empty h2 {
+    margin: 0 0 10px;
+    color: #171717;
+
+    font-size: 22px;
+    font-weight: 1000;
+}
+
+.stories-empty p {
+    margin: 0 0 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.stories-empty a {
+    padding: 12px 20px;
+
+    background: #ed1d24;
+    border: 3px solid #171717;
+    box-shadow: 4px 4px 0 #171717;
+
+    color: #fff;
+    font-size: 12px;
+    font-weight: 1000;
+    text-decoration: none;
+
+    transition: transform 0.2s ease;
+}
+
+.stories-empty a:hover {
+    transform: translate(2px, 2px);
+}
+
+
+/* =========================================================
+   07. RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 1000px) {
+    .stories-page {
+        padding: 40px 25px 65px;
+    }
+
+    .stories-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .stories-page {
+        padding: 30px 15px 50px;
+    }
+
+    .stories-page-header h1 {
+        font-size: 34px;
+    }
+
+    .stories-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .stories-section-heading h2 {
+        font-size: 17px;
+    }
+}
+/* =========================================================
+   STORIES HEADER ACTION
+========================================================= */
+
+.stories-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.create-story-link {
+    flex-shrink: 0;
+    padding: 13px 18px;
+
+    background: #ed1d24;
+    border: 3px solid #171717;
+    box-shadow: 5px 5px 0 #171717;
+
+    color: #fff;
+    font-size: 12px;
+    font-weight: 1000;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: transform 0.2s ease;
+}
+
+.create-story-link:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 #171717;
+}
+
+@media (max-width: 600px) {
+    .stories-header-content {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+/* =========================================================
+   STORY DELETE BUTTON
+========================================================= */
+
+.story-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.delete-story-button {
+    padding: 7px 10px;
+
+    background: #171717;
+    border: 2px solid #171717;
+
+    color: #fff;
+    font-size: 10px;
+    font-weight: 1000;
+
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.delete-story-button:hover {
+    background: #ed1d24;
+}

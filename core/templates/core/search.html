@@ -1,0 +1,128 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Search — MarvelSpace{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="search-page">
+
+    <div class="search-header">
+        <span class="search-eyebrow">MARVELSPACE DATABASE</span>
+        <h1>FIND YOUR <span>UNIVERSE!</span></h1>
+        <p>Discover heroes, civilians and Avengers.</p>
+    </div>
+
+    <form method="get" action="{% url 'search' %}" class="search-form">
+        <div class="search-input-wrapper">
+            <span class="search-input-icon">⌕</span>
+
+            <input
+                type="search"
+                name="q"
+                placeholder="Search by username..."
+                value="{{ query }}"
+                maxlength="150"
+                autocomplete="off"
+            >
+
+            {% if query %}
+                <a href="{% url 'search' %}" class="search-clear">
+                    ✕
+                </a>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="search-submit">
+            SEARCH!
+        </button>
+    </form>
+
+    <div class="search-results">
+
+        {% if query %}
+
+            <div class="search-results-heading">
+                <h2>SEARCH RESULTS</h2>
+                <span>{{ users|length }} FOUND</span>
+            </div>
+
+            {% if users %}
+
+                <div class="search-users-grid">
+
+                    {% for profile_user in users %}
+
+                        <a
+                            href="{% url 'profile' profile_user.username %}"
+                            class="search-user-card"
+                        >
+
+                            <div class="search-user-avatar">
+
+                                {% if profile_user.avatar %}
+                                    <img
+                                        src="{{ profile_user.avatar.url }}"
+                                        alt="{{ profile_user.username }}"
+                                    >
+                                {% else %}
+                                    <span>
+                                        {{ profile_user.username|first|upper }}
+                                    </span>
+                                {% endif %}
+
+                            </div>
+
+                            <div class="search-user-info">
+                                <h3>{{ profile_user.username }}</h3>
+
+                                <span class="search-user-role">
+                                    {{ profile_user.get_role_display }}
+                                </span>
+
+                                {% if profile_user.bio %}
+                                    <p>{{ profile_user.bio|truncatechars:90 }}</p>
+                                {% else %}
+                                    <p>MarvelSpace member</p>
+                                {% endif %}
+                            </div>
+
+                            <span class="search-user-arrow">→</span>
+
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="search-empty">
+                    <span class="search-empty-icon">✕</span>
+                    <h2>NO HEROES FOUND!</h2>
+                    <p>We couldn't find any users matching "{{ query }}".</p>
+                    <span>Try another username.</span>
+                </div>
+
+            {% endif %}
+
+        {% else %}
+
+            <div class="search-empty search-empty-welcome">
+                <span class="search-empty-icon">⌕</span>
+                <h2>WHO ARE YOU LOOKING FOR?</h2>
+                <p>Enter a username to discover members of MarvelSpace.</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}
